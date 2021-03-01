@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+
+package transport;
+
+option java_multiple_files = true;
+option java_outer_classname = "transport";
+option java_package = "com.saichler.pb";
+option go_package = "github.com/saichler/k8sman/go/pb";
+
+message Packet {
+   string sourceUuid = 1;
+   string originUuid = 2;
+   string destUuid   = 3;
+   string destGroup  = 4;
+   int32 priority    = 5;
+   bytes data        = 6;
+}

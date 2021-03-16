@@ -10,9 +10,10 @@ option go_package = "github.com/saichler/k8sman/go/pb";
 
 message Packet {
    string sourceUuid = 1;
-   string originUuid = 2;
-   string destUuid   = 3;
+   string destUuid   = 2;
+   string switchUuid = 3;
    string destGroup  = 4;
-   int32 priority    = 5;
-   bytes data        = 6;
+   int32 sequence    = 5;
+   int32 priority    = 6;
+   bytes data        = 7;
 }

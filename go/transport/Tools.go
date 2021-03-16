@@ -7,11 +7,8 @@ import (
 	"encoding/base64"
 	"errors"
 	"github.com/golang/protobuf/proto"
-	"github.com/saichler/k8sman/go/common"
-	utils "github.com/saichler/utils/golang"
 	"io"
 	"net"
-	"strings"
 	"time"
 )
 
@@ -140,25 +137,4 @@ func Send(pb proto.Message, c *Port) error {
 		return err
 	}
 	return c.Send(data)
-}
-
-func LocalIps() (map[string]string, error) {
-	netIfs, err := net.Interfaces()
-	if err != nil {
-		return nil, errors.New(common.Con("Could not fetch local interfaces:", err.Error()))
-	}
-	result := make(map[string]string)
-	for _, netIf := range netIfs {
-		addrs, err := netIf.Addrs()
-		if err != nil {
-			utils.Error(common.Con("Failed to fetch addresses for net interface:", err.Error()))
-			continue
-		}
-		for _, addr := range addrs {
-			addrString := addr.String()
-			index := strings.Index(addrString, "/")
-			result[addrString[0:index]] = addrString[0:index]
-		}
-	}
-	return result, nil
 }
